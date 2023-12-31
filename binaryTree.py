@@ -11,14 +11,11 @@ class BinaryTreeCreator(object):
         
     def node(self):
         return (self.left, self.right)
-        
 
+        
     def __str__(self):
         return f"{self.right} + '''_'''+ {self.left}"
     
-    def check_for_node(self):
-        pass
-
 
 def huffman_coding_tree(node, left=True, binString= ''):
     if type(node) is str:

@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-
 import os
 import sys
 from collections import defaultdict 
@@ -28,15 +27,29 @@ class FileReader(object):
                 else:
                     data[i] = 1 
         return data
-    
+        
 
     def parse_frequencies(self):
         data = self.create_frequency_table()
-        return sorted(data.items(), key = lambda x: x[1], reverse=True)
+        stringvalue = sorted(data.items(), key = lambda x: x[1], reverse=True)
+        return stringvalue
+    
+
+
+    def process_file_data(self):
+        data = f.parse_frequencies()
+        nodes = data
+        while len(nodes)> 1:
+            (key, c1) = nodes[-1]
+            (key2, c2) = nodes[-2]
+            node = nodes[:-2]
+            node = BinaryTreeCreator(key, key2)
+            nodes.append((node, c1+ c2))
+            nodes = sorted(nodes, key=lambda x: x[1], reverse=True)
+        return huffman_coding_tree(nodes[0][0])
 
     
 if __name__ == '__main__':
     f = FileReader('input.txt')
-    # print(f.create_frequency_table())
-    print(f.parse_frequencies())
+    print(f.process_file_data  ())
 
